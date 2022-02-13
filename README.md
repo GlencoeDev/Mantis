@@ -22,7 +22,7 @@ A step by step list of commands / guide that informs how to install an instance 
 ## Create and source the .env files
 See included in the repo the .env sample file to create your .env file with all secret keys required :
 ```sh
-    cd expensesapp
+    cd mantisapi
     source .env
     export DJANGO_SETTINGS_MODULE=mantisapi.settings.dev
 ```
