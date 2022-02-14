@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import include, path, re_path
 
 # WHEN DEPLOYED CHANGE TO PROD
 from mantisapi.settings.dev import *
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from django.conf.urls import handler400, handler403, handler404, handler500
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -35,15 +37,22 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
+urlpatterns = [
+    path("auth/", include("authentication.urls")),
+    path(
+        "api/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    path("", include("webapp.urls")),
+]
+
+
+handler400 = "helpers.views.handleError400"
+handler403 = "helpers.views.handleError403"
+handler404 = "helpers.views.handleError404"
+handler500 = "helpers.views.handleError500"
+
 
 if ADMIN_ENABLED:
-    urlpatterns = [
-        path("admin/", admin.site.urls),
-        path("auth/", include("authentication.urls")),
-        path(
-            "api/",
-            schema_view.with_ui("swagger", cache_timeout=0),
-            name="schema-swagger-ui",
-        ),
-        # path("", include("mantis.urls")),
-    ]
+    urlpatterns += [path("admin/", admin.site.urls)]

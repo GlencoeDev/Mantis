@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "authentication",
     "drf_yasg",
+    "webapp",
+    "helpers",
 ]
 
 AUTH_USER_MODEL = "authentication.user"

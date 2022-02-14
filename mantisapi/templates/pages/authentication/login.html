@@ -1,4 +1,5 @@
-{% extends 'base-auth.html' %}
+{% extends 'layouts/base-auth.html' %}
+{% block page-title %}Sign into your account{% endblock %}
 {% load static %}
 {% block content %}
 <div class="row h-100">
@@ -36,9 +37,9 @@
                 <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
             </form>
             <div class="text-center mt-5 text-lg fs-4">
-                <p class="text-gray-600">Don't have an account ? <a href="{% url 'register' %}" class="font-bold">Sign
+                <p class="text-gray-600">Don't have an account ? <a href="{% url 'signup' %}" class="font-bold">Sign
                         up</a></p>
-                <p><a class="font-bold" href="#">Forgot password ?</a></p>
+                <p><a class="font-bold" href="{% url 'forgot-password' %}">Forgot password ?</a></p>
             </div>
         </div>
     </div>

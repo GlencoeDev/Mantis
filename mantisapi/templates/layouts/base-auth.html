@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page-title %}{% endblock %} | Mantis</title>
+    <link rel="icon" type="image/png" href="{% static 'images/logo/favicon-transparent.png' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main/bootstrap.css' %}">
+    {% block styles %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/authentication/auth.css' %}">
+</head>
+
+<body>
+    <div id="auth">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>
