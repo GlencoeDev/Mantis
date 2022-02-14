@@ -17,12 +17,12 @@ account{% endblock %} {% load static %} {% block content %}
         {% csrf_token %} {% include 'partials/messages.html'%}
         <div class="form-group position-relative has-icon-left mb-4">
           <input
-            type="text"
-            name="username"
-            id="UserNameField"
-            placeholder="Username"
+            type="email"
+            name="email"
+            id="EmailField"
+            placeholder="Email"
             class="form-control form-control-xl"
-            value="{{fieldValues.username}}"
+            value="{{fieldValues.email}}"
             required
           />
           <div class="form-control-icon">
