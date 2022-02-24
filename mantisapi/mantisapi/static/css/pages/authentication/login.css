@@ -1,5 +1,5 @@
 body {
-    background-color: #fff;
+    background-color: #fff
 }
 
 #auth {
@@ -7,22 +7,13 @@ body {
     overflow-x: hidden
 }
 
-/* #auth #auth-right {
-    background: url(../../images/bg/4853433.jpg), linear-gradient;
-    height: 100%
-} */
-
 .auth-right {
     position: absolute;
     right: 0;
     top:0;
     background:#2d499d;
     height: 100%;
-    width: 60%;
-}
-
-.auth-logo-mobile{
-    display: none;
+    width: 52rem;
 }
 
 #auth #auth-left {
@@ -38,8 +29,11 @@ body {
 #auth #auth-left .auth-subtitle {
     color: #a8aebb;
     font-size: 1.25rem;
+    font-weight: 1000;
     line-height: 2.5rem
 }
+
+
 #auth #auth-left .auth-logo {
     margin-bottom: 3rem;
     margin-top: -3rem
@@ -53,34 +47,7 @@ body {
     #auth #auth-left {
         padding: 5rem
     }
-    .auth-logo{
-        display: none;
-    }
-    .auth-logo-mobile{
-        display: block;
-        height: 3.5rem
-    }
-}
-
-@media screen and (min-width:768px) and (max-width:1000px) {
     .auth-right {
         display: none;
-    }
-}
-
-@media screen and (max-width:576px) {
-    #auth #auth-left {
-        padding: 5rem 3rem
-    }
-    .auth-right {
-        display: none;
-    }
-
-    .auth-logo{
-        display: none;
-    }
-    .auth-logo-mobile{
-        display: block;
-        height: 3.5rem
     }
 }

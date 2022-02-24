@@ -63,7 +63,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     updated_at = models.DateTimeField(
         verbose_name="last login", editable=False, auto_now=True
     )
-
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
     # User Image Upload Functionality to be implemented
     # avatar = models.ImageField(upload_to='avatars/',blank=True)
 

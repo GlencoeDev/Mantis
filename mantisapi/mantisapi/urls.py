@@ -38,13 +38,12 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("auth/", include("authentication.urls")),
+    path("", include("authentication.urls")),
     path(
         "api/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-    path("", include("webapp.urls")),
 ]
 
 

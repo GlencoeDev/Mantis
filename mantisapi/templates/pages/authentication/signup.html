@@ -1,85 +1,132 @@
-{% extends 'layouts/base-auth.html' %}
-{% block page-title %}Create your account{% endblock %}
-{% load static %}
-{% block content %}
+{% extends 'layouts/base-auth.html' %} {% block page-title %}Create your
+account{% endblock %} {% load static %} {% block content %}
 <div class="row h-100">
-    <div class="col-lg-5 col-12">
-        <div id="auth-left">
-            <div class="auth-logo">
-                <a href="{% url 'login' %}"><img src="{% static 'images/logo/mantis.png' %}" alt="Logo"></a>
-            </div>
-            <h1 class="auth-title">Sign Up</h1>
-            <p class="auth-subtitle mb-3">Input your data to register to our website.</p>
-
-            <form action="{% url 'register' %}" class="needs-validation" method="post">
-                {% csrf_token %}
-                {% include 'partials/messages.html'%}
-                <div class="form-group position-relative has-icon-left mb-4">
-                  <input type="text" name="firstname" id="FirstNameField" placeholder="First name" class="form-control form-control-xl" value="{{fieldValues.fullname}}" required>
-                  <div class="form-control-icon">
-                      <i class="bi bi-person"></i>
-                </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                  <input type="text" name="lname" id="LastNameField" placeholder="Last name" class="form-control form-control-xl" value="{{fieldValues.username}}" required>
-                  <div class="form-control-icon">
-                      <i class="bi bi-person"></i>
-                  </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="email" name="email" id="EmailField" placeholder="Email" class="form-control form-control-xl" value="{{fieldValues.email}}" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-envelope"></i>
-                    </div>
-                </div>
-                <div class="email-feedback invalid-feedback " style="display:none;">
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" name="password" id="PasswordField" placeholder="Password" class="form-control form-control-xl" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-shield-lock"></i>
-                    </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" name="confirm-password" id="ConfrimPasswordField" placeholder="Confrim Password" class="form-control form-control-xl" required>
-                    <div class="form-control-icon">
-                        <i class="bi bi-shield-lock"></i>
-                    </div>
-                </div>
-                <div class="form-check d-flex justify-content-center mb-4">
-                    <input
-                      class="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      id="TosCheckbox"
-                      required
-                    />
-                    <label class="form-check-label" for="TosCheckbox">
-                      I agree all statements in <a href="#!">Terms of service</a>
-                    </label>
-                </div>
-                <button class="btn btn-primary btn-block btn-lg mt-2 shadow-lg submit-btn">Sign Up</button>
-            </form>
-            <div class="text-center mt-4 text-lg fs-4">
-                <p class='text-gray-600'>Already have an account? <a href="{% url 'login' %}" class="font-bold">Log
-                        in</a></p>
-            </div>
-            <div class="divider">
-                <div class="divider-text mb-0">OR</div>
-              </div>
-              <button class="btn btn-danger btn-block btn-lg shadow-lg mt-2">
-                <i class="bi bi-google"></i>
-              </button>
-              <button class="btn btn-primary btn-block btn-lg shadow-lg mt-4">
-                <i class="bi bi-facebook"></i>
-              </button>
+  <div class="col-lg-5 col-12">
+    <div id="auth-left">
+        <div class="auth-logo">
+            <a href="/"><img src="{% static 'images/logo/mantis.png' %}" alt="Logo"/></a>
         </div>
-    </div>
-    <div class="col-lg-7 d-none d-lg-block">
-        <div id="auth-right">
-
+        <div class="auth-logo auth-logo-mobile">
+            <a href="/"><img src="{% static 'images/logo/favicon-transparent.png' %}" alt="Logo"/></a>
         </div>
+      <h1 class="auth-title">Sign Up</h1>
+      <p class="auth-subtitle mb-3">
+        Input your data to register to our website.
+      </p>
+
+      <form action="{% url 'signup' %}" class="needs-validation" method="post">
+        {% csrf_token %} {% include 'partials/messages.html'%}
+        <div class="form-group position-relative has-icon-left mb-3">
+          <input
+            type="text"
+            name="firstname"
+            id="FirstNameField"
+            placeholder="First name"
+            class="form-control form-control-xl"
+            value="{{fieldValues.fullname}}"
+            required
+          />
+          <div class="form-control-icon">
+            <i class="bi bi-person"></i>
+          </div>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-3">
+          <input
+            type="text"
+            name="lname"
+            id="LastNameField"
+            placeholder="Last name"
+            class="form-control form-control-xl"
+            value="{{fieldValues.username}}"
+            required
+          />
+          <div class="form-control-icon">
+            <i class="bi bi-person"></i>
+          </div>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-3">
+          <input
+            type="email"
+            name="email"
+            id="EmailField"
+            placeholder="Email"
+            class="form-control form-control-xl"
+            value="{{fieldValues.email}}"
+            required
+          />
+          <div class="form-control-icon">
+            <i class="bi bi-envelope"></i>
+          </div>
+        </div>
+        <div
+          class="email-feedback invalid-feedback"
+          style="display: none"
+        ></div>
+        <div class="form-group position-relative has-icon-left mb-3">
+          <input
+            type="password"
+            name="password"
+            id="PasswordField"
+            placeholder="Password"
+            class="form-control form-control-xl"
+            required
+          />
+          <div class="form-control-icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+        </div>
+        <div class="form-group position-relative has-icon-left mb-3">
+          <input
+            type="password"
+            name="confirm-password"
+            id="ConfrimPasswordField"
+            placeholder="Confrim Password"
+            class="form-control form-control-xl"
+            required
+          />
+          <div class="form-control-icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+        </div>
+        <div class="form-check d-flex justify-content-center mb-3">
+          <input
+            class="form-check-input me-2"
+            type="checkbox"
+            value=""
+            id="TosCheckbox"
+            required
+          />
+          <label class="form-check-label" for="TosCheckbox">
+            I agree all statements in
+            <a href="{% url 'forgot-password' %}">Terms of service</a>
+          </label>
+        </div>
+        <button
+          class="btn btn-primary btn-block btn-lg mt-2 shadow-lg submit-btn"
+        >
+          Sign Up
+        </button>
+      </form>
+      <div class="text-center mt-4 text-lg fs-5">
+        <p class="text-gray-600">
+          Already have an account?
+          <a href="{% url 'login' %}" class="font-bold">Log in</a>
+        </p>
+      </div>
+      <div class="divider">
+        <div class="divider-text mb-0 mt-0">OR</div>
+      </div>
+      <button class="btn btn-danger btn-block btn-lg shadow-lg mt-2">
+        <i class="bi bi-google"></i>
+      </button>
+      <button class="btn btn-primary btn-block btn-lg shadow-lg mt-4">
+        <i class="bi bi-facebook"></i>
+      </button>
     </div>
+  </div>
+  <div class="col-lg-7 d-none d-lg-block">
+    <div class="auth-right"></div>
+  </div>
 </div>
 <script src="{% static 'js/auth-register.js' %}"></script>
 {% endblock %}

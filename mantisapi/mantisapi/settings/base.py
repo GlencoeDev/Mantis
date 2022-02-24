@@ -7,6 +7,7 @@ Copyright (c) 2022, Glencoe Software Canada. All rights reserved.
 """
 import os
 import datetime
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -23,6 +24,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+APPEND_SLASH = False
+
 ADMIN_ENABLED = True
 
 # Application definition
@@ -37,7 +40,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "authentication",
     "drf_yasg",
-    "webapp",
     "helpers",
 ]
 
@@ -153,6 +155,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+MESSAGE_TAGS = {messages.ERROR: "danger"}
+
 
 # EMAIL SET-UP
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

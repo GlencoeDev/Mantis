@@ -1,10 +1,10 @@
-from django.shortcuts import render
-from rest_framework import generics, status, views
+import email
+from django.shortcuts import render, redirect
+from rest_framework import generics, status
 from .serializers import *
-from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from django.conf import settings
-from rest_framework.generics import GenericAPIView
+from django.views import View
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 from django.contrib.sites.shortcuts import get_current_site
@@ -24,9 +24,9 @@ from django.utils.encoding import (
 )
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
-from django.urls import reverse
 from django.core.mail import EmailMessage, EmailMultiAlternatives, send_mail
 from django.template.loader import get_template
+from django.contrib import messages
 from .utils import *
 
 # Create your views here.
@@ -35,6 +35,9 @@ from .utils import *
 class RegisterView(generics.GenericAPIView):  # Allows for User Registeration
     serializer_class = RegisterationSerializer
     renderer_classes = (UserRenderer,)
+
+    def get(self, request):
+        return render(request, "pages/authentication/signup.html")
 
     def post(self, request):
         user = request.data
@@ -72,10 +75,40 @@ class RegisterView(generics.GenericAPIView):  # Allows for User Registeration
         if request.content_type == "application/json":
             return Response(user_data, status=status.HTTP_201_CREATED)
         elif request.content_type == "application/html":
-            return render(request, "pages/authentication/activate-email.html")
+            return render(request, "pages/authentication/index.html")
 
 
-class VerifyEmail(views.APIView):  # Verifies Email
+class LoginApiView(generics.GenericAPIView):  # Login Api View
+    serializer_class = LoginSerializer
+
+    def get(self, request):
+        return render(request, "pages/authentication/login.html")
+
+    def post(self, request):
+        user = request.data
+        serializer = self.serializer_class(data=user)
+        serializer.is_valid(raise_exception=True)
+        if request.content_type == "application/json":
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return render(request, "pages/authentication/index.html")
+
+        #     print("check")
+        #     user = auth.authenticate(email=email, password=password)
+        #     if user:
+        #         if user.is_active:
+        #             auth.login(request,user)
+        #             messages.success(request, "Welcome, "+user.username+'. You are now logged in.')
+        #             return redirect('expenses')
+        #         messages.error(request,'Account is not active, please verify email')
+        #         return render(request,'pages/authentication/login.html')
+        #     messages.error(request,'Invalid credentials, please try again')
+        #     return render(request,'pages/authentication/login.html')
+        # messages.error(request,'Please fill in all fields')
+        # return render(request,'pages/authentication/login.html')
+
+
+class ActivateAccount(generics.GenericAPIView):  # Verifies Email
     serializer_class = EmailVerificationSerializer
 
     token_param_config = openapi.Parameter(
@@ -108,19 +141,13 @@ class VerifyEmail(views.APIView):  # Verifies Email
             )
 
 
-class LoginApiView(generics.GenericAPIView):  # Login Api View
-    serializer_class = LoginSerializer
-
-    def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class RequestPasswordResetEmail(
+class ForgotPasswordView(
     generics.GenericAPIView
 ):  # This sends suser email and validates if user is registered to the database
     serializer_class = ResetPasswordEmailRequestSerializer
+
+    def get(self, request):
+        return render(request, "pages/authentication/forgot-password.html")
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
